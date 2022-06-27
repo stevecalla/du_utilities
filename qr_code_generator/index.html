@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body>
+    <h1>QR Code Generator</h1>
+
+    <p>Enter a URL and click the button to generate a QR code.</p>
+
+    <form class="qr-form" action="GET">
+      <input
+        id="qrText"
+        class="qr-input"
+        type="url"
+        name="text"
+        maxlength="1024"
+        placeholder="https://www.css-tricks.com"
+        value=""
+      />
+      <button id="qrSubmit" class="qr-button" type="button">Generate 🚀</button>
+    </form>
+
+    <div class="qr-code"></div>
+
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
+
+<!-- Source:
+https://css-tricks.com/lets-make-a-qr-code-generator-with-a-serverless-function/
+
+https://codepen.io/geoffgraham/pen/LYQzMwz -->

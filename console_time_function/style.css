@@ -1,0 +1,35 @@
+/*------------MAIN PAGE LAYOUT---------------*/
+* {
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+  /* overflow: hidden;
+  position: relative; */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  position: relative;
+  /* flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  overflow: scroll; */
+}

@@ -1,0 +1,50 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/*------------MAIN PAGE LAYOUT---------------*/
+* {
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+  text-align: center;
+  /* overflow: hidden;
+  position: relative; */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 20vh;
+  width: 47.9vw;
+  /* border: 5px solid black; */
+  /* text-align: center; */
+}
+
+.aside_content {
+  height: 40vh;
+  width: 49vw;
+  /* border: 5px solid blue; */
+}
+
+header, nav, section, article, aside, footer {
+  border: 1px solid green;
+  font-weight: bold;
+  text-align: center;
+}

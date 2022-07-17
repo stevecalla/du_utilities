@@ -11,9 +11,23 @@ As an employee with access to sensitive data I want to randomly generate a passw
 <!-- <details><summary></summary> -->
 
 1. [Overview](#overview)
-2. [Acceptance Criteria](#criteria)
+2. [Features](#features)
+3. [Future Enhancements](#future-enhancements)
+2. [Acceptance Criteria](#acceptance-criteria)
 4. [Technologies](#technologies)
 6. [Resources](#resources)
+
+## Features
+
+1. TBD
+2. TBD
+3. TBD
+
+## Future Enhancements
+
+1. TBD
+2. TBD
+3. TBD
 
 
 ## Criteria

@@ -50,12 +50,14 @@ WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
 ```
 
+## Website Preview - Static Screenshot
+
+<img width="1437" alt="Screen Shot 2022-07-19 at 8 11 17 PM" src="https://user-images.githubusercontent.com/72281855/179880845-3c7d8d98-1a44-414a-920d-ad7d0ee6f122.png">
+
 
 ## Website Preview - Video Preview
 
-<!-- <img src="https://media.giphy.com/media/EvIYpPKoJpXhnHvkjD/giphy-downsized-large.gif" width="100%" height="500"/> -->
-
-<img src="https://media.giphy.com/media/vyRpm5Rk0Ab5LBYt8T/giphy-downsized-large.gif" width="100%" height="425"/>
+<img src="https://media.giphy.com/media/410DOwYuE3CO7yzPnA/giphy-downsized-large.gif" width="100%" height="425"/>
 
 ## Technologies
 

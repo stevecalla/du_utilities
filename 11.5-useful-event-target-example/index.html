@@ -19,7 +19,7 @@
   </head>
   <body>
     <div id="container">
-     <div class="tile">1</div>
+     <div class="tile" style="color:red">1</div>
      <div class="tile">2</div>
      <div class="tile">3</div>
      <div class="tile">4</div>
@@ -30,19 +30,33 @@
      <div class="tile">9</div>
    </div>
     <script>
+      // const container = document.querySelector('#container');
+      // container.addEventListener('click', event => {
+        //   console.log(event);
+        //   console.log(event.target);
+        //   console.log(event.srcElement);
+        //   event.target.style.backgroundColor = bgChange();
+        // });
+      const container = document.getElementById('container');
+      container.addEventListener('click', assignColor);
+      function assignColor(event) {
+        console.log(event);
+        console.log(event.target);
+        // console.log(event.srcElement);
+        // console.log(event.target.innerText);
+        event.target.style.backgroundColor = getRandomColor();
+        event.target.style.color = getRandomColor();
+        event.target.style.border = "2px solid black";
+        // event.target.style.borderStyle = "dashed groove none dotted";
+        // event.target.style.fontStyle = "italic";
+      }
       function random(number) {
         return Math.floor(Math.random() * number);
       }
-      function bgChange() {
+      function getRandomColor() {
         const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
         return rndCol;
       }
-      const container = document.querySelector('#container');
-      container.addEventListener('click', event => {
-        console.log(event);
-        console.log(event.target);
-        event.target.style.backgroundColor = bgChange()
-      });
     </script>
   </body>
 </html>

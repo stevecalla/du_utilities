@@ -10,7 +10,7 @@ var sectionContent = document.querySelector('section');
 console.time('loop');
 console.time('a');
 
-for(let i = 0; i < 100; i++) {
+for(let i = 0; i < 50; i++) {
   console.log(i);
   // sectionContent.innerHTML += `${i}\n`;
   sectionContent.innerHTML += String.raw`${i} <br>`;

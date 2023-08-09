@@ -1,14 +1,16 @@
 /**
  * @description Accepts user input in the command line (or sets a default of 15) for the
  *  number of minutes the timer will countdown
- * @example node timer.js 12 10 
+ * instructions = in terminal type "node index2.js <time> <seconds> <interval>" or it will default to 15 minutes
+ * @example node index2.js 12 0 10
+ * to stop timer press control + c
  * ^^^ above example will run 100 times faster than real time since 10 was entered as the inverval
  *  default is 1000 which equates to real time
  * "npm install sound-player" (https://www.npmjs.com/package/sound-player)
  * Also "brew install mpg321" for the sound to work
  * Running: "node index2.js" with no args will default to 15 minutes, 
  * Running: "node index2.js 0 30" will do 30 seconds, 
- * Running: "node index 5 0 1000" will do 5 minutes with 1 second interval
+ * Running: "node index2.js 5 0 1000" will do 5 minutes with 1 second interval
  */
  const soundplayer = require("sound-player");
  const minutes = parseInt(process.argv[2]);

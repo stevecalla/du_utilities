@@ -1,4 +1,5 @@
 //instructions = in terminal type "node index.js <time>" or it will default to 15 minutes
+//to stop timer press control + c
 const minutes = parseInt(process.argv[2]) || 15;
 
 

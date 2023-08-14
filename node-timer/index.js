@@ -2,10 +2,8 @@
 //to stop timer press control + c
 const minutes = parseInt(process.argv[2]) || 15;
 
-
 const totalSeconds = minutes * 60;
 let secondsElapsed = 0;
-
 
 // time to format is in seconds
 const formatOutput = (timeToFormat) => {
@@ -15,11 +13,8 @@ const formatOutput = (timeToFormat) => {
     Math.floor(timeToFormat / 3600) > 0
       ? `${Math.floor(timeToFormat / 3600)} hour(s)`
       : "";
-
-
   return `${hours} ${minutes} minute(s) ${seconds} second(s)`;
 };
-
 
 setInterval(() => {
   console.log(`Time remaining: ${formatOutput(totalSeconds - secondsElapsed)}`);

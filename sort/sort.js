@@ -59,3 +59,27 @@ items.sort((a, b) => {
   return 0;
 });
 console.log(items);
+
+//Todo: sort array of dates
+// https://www.antoniofullone.com/blog/momentjs-order-date
+// https://momentjs.com/docs/#/use-it/
+const moment = require('moment'); 
+const arr = [
+  { _id: 1, createdAt: moment('Sat Jan 07 2018 11:50:21 GMT+0000 (WET)') },
+  { d_id: 2, createdAt: moment('Sat Jan 06 2018 11:50:21 GMT+0000 (WET)') }
+];
+
+arr.sort((a, b) => {
+  return moment(a.createdAt).diff(b.createdAt);
+});
+
+console.log(arr);
+  
+let obj = {
+    year: 2022, month: 6, day: 17,
+    minutes: 10, second: 7, milliseconds: 55
+};
+let date = moment(obj);
+console.log(
+    date.format("dddd, Do MMM YYYY, h:mm:ss A")
+ );

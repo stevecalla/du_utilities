@@ -1,3 +1,5 @@
+// source: https://www.linkedin.com/posts/madsbrodt_javascript-tip-you-can-iterate-objects-activity-7097195460376829952-9ChQ?utm_source=share&utm_medium=member_desktop
+
 const a = {a: 1, c: 2};
 
 //iterative using for loop

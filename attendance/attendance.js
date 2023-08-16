@@ -1,5 +1,15 @@
-//LINK TO ORIGINAL VERSION FROM BOOTCAMP INSTRUCTOR SLACK CHANNEL
-// https://instruct-bootcamps.slack.com/archives/C04NT3N1ZQU/p1680522965029999
+//INSTRX TO CHANGE ALL ATTENDANCE DROPDOWN TO "Present"
+//a) Click to the date of interest
+//b) Copy Step #0, #1 into the console. Hit enter
+//c) Copy Step #3 into the console. Hit Enter
+//d) Double check work by using the Print instrx below
+
+//INSTRX TO PRINT STUDENT LIST WITH ATTENDANCE TO CONSOLE
+//a) Click to the date of interest
+//b) Copy Step #0, #1, #2, #2a into the console. Hit enter
+
+//SELECT THE 1ST ROW ELEMENT
+document.querySelector('.row');
 
 //#1) TARGET & SELECT => STUDENT & ATTENDANCE LIST
 const studentList = document.querySelectorAll(`a`);
@@ -37,6 +47,8 @@ if (studentList.length === attendanceList.length) {
   console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
 };
 
+//LINK TO ORIGINAL VERSION FROM BOOTCAMP INSTRUCTOR SLACK CHANNEL
+// https://instruct-bootcamps.slack.com/archives/C04NT3N1ZQU/p1680522965029999
 
 // Ignacio Giadach
 //   4 months ago

@@ -1,15 +1,18 @@
 //INSTRX TO CHANGE ALL ATTENDANCE DROPDOWN TO "Present"
 //a) Click to the date of interest
-//b) Copy Step #0, #1 into the console. Hit enter
-//c) Copy Step #3 into the console. Hit Enter
-//d) Double check work by using the Print instrx below
-
+//b) Use element selector to click on the first student
+//c) Copy Step #0, #1 into the console. Hit enter
+//d) Copy Step #3 into the console. Hit Enter
+//e) Double check work by using the Print instrx below
+​
 //INSTRX TO PRINT STUDENT LIST WITH ATTENDANCE TO CONSOLE
 //a) Click to the date of interest
+//b) Use element selector to click on the first student
 //b) Copy Step #0, #1, #2, #2a into the console. Hit enter
-
+​
 //SELECT THE 1ST ROW ELEMENT
-document.querySelector('.row');
+document.querySelector('.row'); //select 
+clear();
 
 //#1) TARGET & SELECT => STUDENT & ATTENDANCE LIST
 const studentList = document.querySelectorAll(`a`);

@@ -43,9 +43,25 @@ if (studentList.length === attendanceList.length) {
   console.log('ERROR PRINTING LIST - ARRAYS NOT SAME LENGTH');
 };
 
-//#3) SET ALL STUDENTS TO PRESENT
+//#3) SET ALL STUDENTS WITH "None" TO "Present"
 if (studentList.length === attendanceList.length) {
-  attendanceList.forEach(studentAttendance => studentAttendance.textContent = "Present");
+  const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');
+
+  attendanceDropdowns.forEach((dropdown) => {
+    const preselected = dropdown.querySelector('.divider.text').textContent;
+    console.log('preselected= ' + preselected);
+
+    
+    if (preselected === "None") {
+      const menu = dropdown.querySelector('.menu');
+      console.log('menu= ' + menu);
+      const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === 'Present');
+
+      if (presentOption) {
+        presentOption.click();
+      };
+    };
+  });
 } else {
   console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
 };
@@ -60,17 +76,17 @@ if (studentList.length === attendanceList.length) {
 // You have to only mark those “Absent” or “Absent - Excused”, it will select all “None” as “Present” - saves a lot of time.
 // Just select an inner element, then paste the script in the browser console.
 
-// const dropdowns = document.querySelectorAll('.ui.selection.dropdown');
+const dropdowns = document.querySelectorAll('.ui.selection.dropdown');
 
-// dropdowns.forEach((dropdown) => {
-//   const preselected = dropdown.querySelector('.divider.text').textContent;
+dropdowns.forEach((dropdown) => {
+  const preselected = dropdown.querySelector('.divider.text').textContent;
   
-//   if (preselected === "None") {
-//     const menu = dropdown.querySelector('.menu');
-//     const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === 'Present');
+  if (preselected === "None") {
+    const menu = dropdown.querySelector('.menu');
+    const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === 'Present');
 
-//     if (presentOption) {
-//       presentOption.click();
-//     }
-//   }
-// });
+    if (presentOption) {
+      presentOption.click();
+    }
+  }
+});

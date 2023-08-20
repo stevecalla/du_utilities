@@ -1,18 +1,18 @@
 //Todo - run code in console, source, snippets
 // https://developer.chrome.com/docs/devtools/javascript/snippets/
 
-//Todo - step#1: Navigate to Bootcamp
+//Todo - step#0: Navigate to Bootcamp
 clear();
 console.log("NAVIGATE TO BOOTCAMP");
 window.location.assign("https://bootcampspot.instructure.com/courses/4139"); //navigate to course
 
-//Todo - step#2: Navigate to Attendance
+//Todo - step#1: Navigate to Attendance
 //ToDo - need to use the console, element tool to select the Attendance element then run code below
 clear();
 console.log("NAVIGATE TO ATTENDANCE");
 document.querySelector(".context_external_tool_234").click(); //select Attendance menu
 
-//Todo - step#3: Navigate to Today
+//Todo - step#2: Navigate to Today
 clear();
 //GET TODAY'S dateListlet date = new Date();
 let date = new Date();
@@ -77,6 +77,34 @@ for (let i = 0; i < dateList.length; i++) {
 };
 console.log("dateList = " + dateList);
 
+//Todo - step#3: Create Checkboxes
+// document.body.onload = addElement;
+
+const studentList = document.querySelectorAll('.student-details-list');
+console.log('nodes= ' + studentList.childNodes);
+
+console.log('length= ' + studentList.length);
+
+for (let i = 2; i < 75; i++) {
+    const studentRow = studentList[0].querySelectorAll('.row');
+    const attendanceStatus = studentRow[i].querySelectorAll('.seven');
+    console.log(studentRow);
+    console.log(attendanceStatus);
+
+    //CREATE CHECKBOX
+    const createCheckbox = document.createElement("input");
+    createCheckbox.type = "checkbox";
+    createCheckbox.setAttribute('type', "checkbox");
+    createCheckbox.setAttribute('class', "wide column");
+
+    //APPEND
+    studentRow[i].appendChild(createCheckbox);
+    attendanceStatus.forEach(a => console.log('y'));
+    attendanceStatus.forEach(a => a.appendChild(createCheckbox));
+
+    console.log(studentRow[i]);
+};
+
 //Todo - step#4: Get Student List
 //SELECT THE 1ST ROW ELEMENT
 document.querySelector('body .row');
@@ -122,9 +150,47 @@ if (studentList.length === attendanceList.length) {
 };
 
 //Todo - step#6: Update Attendance
+//#6) SET ALL STUDENTS TO PRESENT
+if (studentList.length === attendanceList.length) {
+  const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');
+
+  attendanceDropdowns.forEach((dropdown) => {
+    const preselected = dropdown.querySelector('.divider.text').textContent;
+    console.log('preselected= ' + preselected);
+
+    if (preselected === "None") {
+      const menu = dropdown.querySelector('.menu');
+      console.log('menu= ' + menu);
+      const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === 'Present');
+
+      if (presentOption) {
+        presentOption.click();
+      };
+    };
+  });
+} else {
+  console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
+};
+
+//Todo: - step#6a: Set all students to None
 //#3) SET ALL STUDENTS TO PRESENT
 if (studentList.length === attendanceList.length) {
-  attendanceList.forEach(studentAttendance => studentAttendance.textContent = "Present");
+  const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');
+
+  attendanceDropdowns.forEach((dropdown) => {
+    const preselected = dropdown.querySelector('.divider.text').textContent;
+    console.log('preselected= ' + preselected);
+
+    // if (preselected === "None") {
+      const menu = dropdown.querySelector('.menu');
+      console.log('menu= ' + menu);
+      const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === 'None');
+
+      if (presentOption) {
+        presentOption.click();
+      };
+    // };
+  });
 } else {
   console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
 };

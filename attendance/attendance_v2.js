@@ -111,9 +111,9 @@ document.querySelector('body .row');
 document.querySelector('.row'); //select 
 
 //#1) TARGET & SELECT => STUDENT & ATTENDANCE LIST
-const studentList = document.querySelectorAll(`a`);
+const studentList2 = document.querySelectorAll(`a`);
 const attendanceList = document.querySelectorAll(`.divider.text`);
-console.log(studentList.length + " " + attendanceList.length);
+console.log(studentList2.length + " " + attendanceList.length);
 
 //Todo - step#5: Print Student List
 clear();

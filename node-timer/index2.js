@@ -31,9 +31,7 @@
  const totalSeconds = !minutes && !seconds ? 15 * 60 : minutes ? minutes * 60 : seconds; // 120
  let secondsElapsed = 0;
  
- 
  /**
-  *
   * @param {number} timeToFormat Number of seconds left on the timer
   * @returns  3660 in
   */
@@ -41,8 +39,6 @@
    const hours = Math.floor(timeToFormat / 3600);
    const minutes = Math.floor((timeToFormat - hours * 3600) / 60);
    const seconds = timeToFormat % 60;
- 
- 
    return `${
      hours ? `${hours} hour(s)` : ""
    } ${minutes} minute(s) ${seconds} second(s)`;

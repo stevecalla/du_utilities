@@ -1,20 +1,17 @@
 //Todo - run code in console, source, snippets
 // https://developer.chrome.com/docs/devtools/javascript/snippets/
 
-//Todo - step#0: Navigate to Bootcamp
+//TODO Step #0 navigate to Bootcamp
 clear();
 console.log("NAVIGATE TO BOOTCAMP");
 window.location.assign("https://bootcampspot.instructure.com/courses/4139"); //navigate to course
 
-//Todo - step#1: Navigate to Attendance
-//ToDo - need to use the console, element tool to select the Attendance element then run code below
+//TODO Step #1 Navigate to Attendance
 clear();
 console.log("NAVIGATE TO ATTENDANCE");
 document.querySelector(".context_external_tool_234").click(); //select Attendance menu
 
-//Todo - step#2: Navigate to Today
-clear();
-//GET TODAY'S dateListlet date = new Date();
+//TODO Step #2 GET TODAY'S date
 let date = new Date();
 console.log(date);
 
@@ -43,7 +40,6 @@ switch (dateDay % 10) {
     case 3: firstLetter = "r"; secondLetter = "d"; break;
     default: firstLetter = "t"; secondLetter = "h";
 };
-// https://stackoverflow.com/questions/15397372/javascript-new-date-ordinal-st-nd-rd-th
 
 let count = 0;
 let tempDate = date.split('');
@@ -77,16 +73,14 @@ for (let i = 0; i < dateList.length; i++) {
 };
 console.log("dateList = " + dateList);
 
-//Todo - step#3: Create Checkboxes
-// document.body.onload = addElement;
-
-const studentList = document.querySelectorAll('.student-details-list');
+//TODO Step #3 Create Checkboxes
+const studentList2 = document.querySelectorAll('.student-details-list');
 console.log('nodes= ' + studentList.childNodes);
 
 console.log('length= ' + studentList.length);
 
 for (let i = 2; i < 75; i++) {
-    const studentRow = studentList[0].querySelectorAll('.row');
+    const studentRow = studentList2[0].querySelectorAll('.row');
     const attendanceStatus = studentRow[i].querySelectorAll('.seven');
     console.log(studentRow);
     console.log(attendanceStatus);
@@ -105,20 +99,20 @@ for (let i = 2; i < 75; i++) {
     console.log(studentRow[i]);
 };
 
-//Todo - step#4: Get Student List
+//TODO Step #4 Get Student List
 //SELECT THE 1ST ROW ELEMENT
 document.querySelector('body .row');
 document.querySelector('.row'); //select 
 
 //#1) TARGET & SELECT => STUDENT & ATTENDANCE LIST
-const studentList2 = document.querySelectorAll(`a`);
+const studentList = document.querySelectorAll(`a`);
 const attendanceList = document.querySelectorAll(`.divider.text`);
-console.log(studentList2.length + " " + attendanceList.length);
+console.log(studentList.length + " " + attendanceList.length);
 
-//Todo - step#5: Print Student List
+//TODO Step #5 Print Student List with Attendance
 clear();
 
-//#2) CREATE CONSOLE.LOG STYLE
+//CREATE CONSOLE.LOG STYLE
 const styleNotPresent = [
   'color: green',
   'background: yellow',
@@ -126,31 +120,152 @@ const styleNotPresent = [
 ].join(';'); // 2. Concatenate the individual array item and concatenate them into a string separated by a semi-colon (;)
 
 const stylePresent = [
-  'color: white',
+  'color: red',
   // 'background: Blue',
 ].join(';'); // 2. Concatenate the individual array item and concatenate them into a string separated by a semi-colon (;)
 //source: https://www.samanthaming.com/tidbits/40-colorful-console-message/
 
-//#2a) PRINT STUDENT LIST WITH ATTENDANCE
+//#5) PRINT STUDENT LIST WITH ATTENDANCE
 if (studentList.length === attendanceList.length) {
   for (let i = 0; i < studentList.length; i++) {
       attendanceList[i].innerText !== "Present" ? 
         console.log((i + 1) + " => " + `%c${studentList[i].textContent}` + " => " + attendanceList[i].textContent, styleNotPresent) 
-        : console.log((i + 1) + " => " + studentList[i].textContent + " => " + attendanceList[i].textContent)
+        : console.log((i + 1) + " => " + `%c${studentList[i].textContent}` + " => " + attendanceList[i].textContent, stylePresent);
+ 
   };
 } else {
   console.log('ERROR PRINTING LIST - ARRAYS NOT SAME LENGTH');
 };
 
-//#3) SET ALL STUDENTS TO PRESENT
+
+//TODO Step #5a Print Student List with Attendance
+clear();clear();
+
+const styleNotPresent2 = [
+  'color: green',
+  'background: yellow',
+  'font-size: 14px',
+].join(';'); // 2. Concatenate the individual array item and concatenate them into a string separated by a semi-colon (;)
+
+const stylePresent2 = [
+  'color: white',
+  // 'background: Blue',
+].join(';'); // 2. Concatenate the individual array item and concatenate them into a string separated by a semi-colon (;)
+//source: https://www.samanthaming.com/tidbits/40-colorful-console-message/
+
+//PRINT STUDENT LIST WITH ATTENDANCE
+absentList = [];
 if (studentList.length === attendanceList.length) {
-  attendanceList.forEach(studentAttendance => studentAttendance.textContent = "Present");
+  count = 0;
+  for (let i = 0; i < studentList.length; i++) {  
+    //PRINT ONLY ABSENT STUDENTS
+
+      attendanceList[i].innerText !== "Present" && count++;
+      
+      attendanceList[i].innerText !== "Present" && absentList.push(studentList[i].textContent);
+          
+      attendanceList[i].innerText !== "Present" && 
+        console.log(count + ") " + (i + 1) + " => " + `%c${studentList[i].textContent}` + " => " + attendanceList[i].textContent, styleNotPresent);
+
+      // attendanceList[i].innerText !== "Present" ? 
+        // console.log((i + 1) + " => " + `%c${studentList[i].textContent}` + " => " + attendanceList[i].textContent, styleNotPresent) 
+        // : console.log((i + 1) + " => " + studentList[i].textContent + " => " + attendanceList[i].textContent)
+ 
+  };
 } else {
-  console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
+  console.log('ERROR PRINTING LIST - ARRAYS NOT SAME LENGTH');
 };
 
-//Todo - step#6: Update Attendance
-//#6) SET ALL STUDENTS TO PRESENT
+console.log(absentList);
+
+//TODO Step #5b WRITE STUDENT LIST TO CLIPBOARD
+//After clicking run, click on the document window otherwise it will error
+
+clear();
+
+async function writeToClipboard () {
+  if (!navigator.clipboard) {
+    console.log("Clipboard API not available");
+    return;
+  };
+
+  //convert node list to array
+  let students = [];
+  for (let i = 0; i < studentList.length; i++) {
+    // let object = { name: studentList[i].textContent }; 
+    // students.push(object);  
+    students.push(studentList[i].textContent);
+  };
+
+  //convert array to JSON for clipboard
+  students = JSON.stringify(students);
+  console.log(students);
+
+  //copy to clipboard
+  try {
+    await navigator.clipboard.writeText(students);
+  } catch (err) {
+    console.error('Failed to writeToClipboard!', err)
+  }
+}
+
+//set timeout is necessary; need to click run, then in document 
+//to prevent error
+setTimeout(() => {writeToClipboard() }, 5000)
+
+//TODO Step #5c Export to Excel
+clear();
+
+function exportTableToExcel(tableID, filename = '') {
+  var downloadLink;
+  var dataType = 'application/vnd.ms-excel';
+
+  //convert node list to array
+  let students = [];
+  for (let i = 0; i < studentList.length; i++) { 
+    students.push(studentList[i].textContent);
+  };
+
+  // Loop through the dataArray and generate table rows
+  var tableHTML = '<table><tbody>';
+  console.log(studentList)
+  for (let i = 0; i < students.length; i++) {
+    tableHTML += '<tr>';
+    tableHTML += `<td>${students[i]}</td>`;
+    tableHTML += '</tr>';
+  }
+
+  tableHTML += '</tbody></table>';
+
+  // console.log(tableHTML);
+  
+  // Specify file name
+  filename = filename ? filename+'.xls' : 'excel_data.xls';
+  
+  // Create download link element
+  downloadLink = document.createElement("a");
+  console.log(downloadLink);
+  
+  document.body.appendChild(downloadLink);
+  
+  if (navigator.msSaveOrOpenBlob) {
+      var blob = new Blob(['\ufeff', tableHTML], { type: dataType });
+      navigator.msSaveOrOpenBlob(blob, filename);
+  } else {
+      // Create a link to the file
+      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  
+      // Setting the file name
+      downloadLink.download = filename;
+      
+      //triggering the function
+      downloadLink.click();
+  }
+}
+
+exportTableToExcel();
+
+//TODO #6) SET ALL STUDENTS TO PRESENT
 if (studentList.length === attendanceList.length) {
   const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');
 
@@ -172,8 +287,7 @@ if (studentList.length === attendanceList.length) {
   console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
 };
 
-//Todo: - step#6a: Set all students to None
-//#3) SET ALL STUDENTS TO PRESENT
+//TODO #6a) SET ALL STUDENTS TO None
 if (studentList.length === attendanceList.length) {
   const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');
 
@@ -195,5 +309,18 @@ if (studentList.length === attendanceList.length) {
   console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
 };
 
-//Todo - utility: clear
-clear();
+//TODO Step #7: Update Attendance Backup Code
+const dropdowns = document.querySelectorAll('.ui.selection.dropdown');
+
+dropdowns.forEach((dropdown) => {
+  const preselected = dropdown.querySelector('.divider.text').textContent;
+  
+  if (preselected === "None") {
+    const menu = dropdown.querySelector('.menu');
+    const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === 'Present');
+
+    if (presentOption) {
+      presentOption.click();
+    }
+  }
+});

@@ -213,22 +213,25 @@ async function writeToClipboard () {
 //to prevent error
 setTimeout(() => {writeToClipboard() }, 5000)
 
-//TODO Step #5c Export to Excel
+//Step#5c: Export to Excel
 clear();
-
-function exportTableToExcel(tableID, filename = '') {
+function exportTableToExcel(filename = '') {
   var downloadLink;
   var dataType = 'application/vnd.ms-excel';
 
-  //convert node list to array
+  // Convert NodeList to array
   let students = [];
-  for (let i = 0; i < studentList.length; i++) { 
+  for (let i = 0; i < studentList.length; i++) {
     students.push(studentList[i].textContent);
   };
 
-  // Loop through the dataArray and generate table rows
-  var tableHTML = '<table><tbody>';
   console.log(studentList)
+  console.log(students);
+
+  // Create table HTML
+  var tableHTML = '<table><tbody>';
+
+  // Loop through students and add rows
   for (let i = 0; i < students.length; i++) {
     tableHTML += '<tr>';
     tableHTML += `<td>${students[i]}</td>`;
@@ -237,33 +240,103 @@ function exportTableToExcel(tableID, filename = '') {
 
   tableHTML += '</tbody></table>';
 
-  // console.log(tableHTML);
-  
+  console.log(tableHTML)
+
   // Specify file name
-  filename = filename ? filename+'.xls' : 'excel_data.xls';
-  
+  filename = filename ? filename + '.xls' : 'excel_data.xls';
+
   // Create download link element
   downloadLink = document.createElement("a");
-  console.log(downloadLink);
-  
+
   document.body.appendChild(downloadLink);
-  
+
   if (navigator.msSaveOrOpenBlob) {
-      var blob = new Blob(['\ufeff', tableHTML], { type: dataType });
-      navigator.msSaveOrOpenBlob(blob, filename);
+    var blob = new Blob(['\ufeff', tableHTML], { type: dataType });
+    navigator.msSaveOrOpenBlob(blob, filename);
   } else {
-      // Create a link to the file
-      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-  
-      // Setting the file name
-      downloadLink.download = filename;
-      
-      //triggering the function
-      downloadLink.click();
+    // Create a link to the file
+    downloadLink.href = 'data:' + dataType + ', ' + encodeURIComponent(tableHTML);
+
+    // Setting the file name
+    downloadLink.download = filename;
+
+    // Triggering the download
+    downloadLink.click();
   }
 }
 
-exportTableToExcel();
+// // Usage example
+// const studentList = document.querySelectorAll('.student'); // Replace with actual selector
+let date2 = new Date();
+exportTableToExcel(`student_data ${date2}`);
+
+//Step#5c: Export to Excel
+//this code removed the space between the first and last name
+// function exportTableToExcel(tableID, filename = '') {
+//   var downloadLink;
+//   var dataType = 'application/vnd.ms-excel';
+
+//   //convert node list to array
+//   let students = [];
+//   for (let i = 0; i < studentList.length; i++) { 
+//     students.push(studentList[i].textContent);
+//   };
+  
+//   console.log(students);
+
+//   // Loop through the dataArray and generate table rows
+//   var tableHTML = '<table><tbody>';
+  
+//   console.log(studentList)
+//   for (let i = 0; i < students.length; i++) {
+//     tableHTML += '<tr>';
+//     tableHTML += `<td>${students[i]}</td>`;
+//     tableHTML += '</tr>';
+    
+//     // tableHTML += '<tr>';
+//     // for (const value of dataArray[i]) {
+//     //   tableHTML += `<td>${value}</td>`;
+//     // }
+//     // tableHTML += '</tr>';
+//   }
+
+//   tableHTML += '</tbody></table>';
+
+//   console.log(tableHTML);
+  
+//   // Specify file name
+//   filename = filename ? filename+'.xls' : 'excel_data.xls';
+  
+//   // Create download link element
+//   downloadLink = document.createElement("a");
+//   console.log(downloadLink);
+  
+//   document.body.appendChild(downloadLink);
+  
+//   if (navigator.msSaveOrOpenBlob) {
+//       var blob = new Blob(['\ufeff', tableHTML], { type: dataType });
+//       navigator.msSaveOrOpenBlob(blob, filename);
+//   } else {
+//       // Create a link to the file
+//       downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  
+//       // Setting the file name
+//       downloadLink.download = filename;
+      
+//       //triggering the function
+//       downloadLink.click();
+//   }
+// }
+
+// // Usage
+// const dataArray = [
+//   ['Name', 'Age', 'Location'],
+//   ['Alice', '25', 'New York'],
+//   ['Bob', '30', 'Los Angeles'],
+//   ['Carol', '28', 'Chicago']
+// ];
+
+
 
 //TODO #6) SET ALL STUDENTS TO PRESENT
 if (studentList.length === attendanceList.length) {

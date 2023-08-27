@@ -1,5 +1,6 @@
 // https://github.com/aceakash/string-similarity#readme
 // https://www.npmjs.com/package/string-similarity
+// npm install string-similarity
 
 // import stringSimilarity from 'string-similarity';
 const stringSimilarity = require("string-similarity");

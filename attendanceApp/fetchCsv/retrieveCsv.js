@@ -6,7 +6,7 @@
 import fs from 'fs/promises';
 import Papa from 'papaparse'; //https://www.papaparse.com/demo
 import clipboardy from 'clipboardy';
-import excel from 'exceljs';
+import excel from 'exceljs'; //https://github.com/exceljs/exceljs#importing
 import { spawn } from 'child_process'; ////open excel file
 
 async function parseCSVFile() {
@@ -54,8 +54,6 @@ parseCSVFile()
       return nameA.localeCompare(nameB);
     });
 
-    // console.log(sortedParticipants);
-
     // //create string and copy to clipboard
     let parsedDataString = sortedParticipants.map(name => `\"${name['userName']}\"`).join(', ');
     clipboardy.writeSync(parsedDataString);
@@ -101,9 +99,8 @@ parseCSVFile()
     await workbook.xlsx.writeFile(outputFile);
     console.log('Excel file created:', outputFile);
 
-    // setTimeout(() => {
-      openFileWithDefaultProgram(outputName);
-    // }, 10000);
+    //open excel file
+    openFileWithDefaultProgram(outputName);
 
   } catch (error) {
     console.error('Error:', error);

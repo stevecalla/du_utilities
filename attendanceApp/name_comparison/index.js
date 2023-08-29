@@ -135,3 +135,5 @@ console.log(maxSimilarityScores.forEach((score, i) => {
     console.log(count + ") " + chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   } 
   }));
+
+  

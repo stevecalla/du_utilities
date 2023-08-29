@@ -135,5 +135,29 @@ console.log(maxSimilarityScores.forEach((score, i) => {
     console.log(count + ") " + chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   } 
   }));
+  
+
+let inputPlug = maxSimilarityScores.map((score, i) => {
+  let status = score.maxSimilarity <= 0.5 ? "Absent" : "Present";
+  return status;
+  return {
+    // index: i,
+    // studentName: score.name,
+    // status: status,
+    // matchName: score.matchName,
+    // score: score.maxSimilarity,
+  }
+});
+
+console.log(inputPlug);
+console.log(inputPlug.length);
+
+import clipboardy from 'clipboardy';
+//PRINT ATTENDANCE STATUS TO CLIPBOARD
+// //create string and copy to clipboard
+let inputPlugString = inputPlug.map(name => `\"${name}\"`).join(', ');
+clipboardy.writeSync(inputPlugString);
+console.log(inputPlugString);
+// console.log('Names saved to clipboard ' + sortedParticipants.length);
 
   

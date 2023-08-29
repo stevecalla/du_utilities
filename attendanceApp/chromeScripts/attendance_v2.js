@@ -360,6 +360,46 @@ if (studentList.length === attendanceList.length) {
   console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
 };
 
+//TODO #6.1) SET ATTENDANCE STATUS
+let statusData =
+[
+  'Present', 'Present', 'Present', 'Absent',  'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present',
+  'Absent',  'Present', 'Present', 'Present', 'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present',
+  'Absent',  'Present', 'Present', 'Present', 'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present',
+  'Absent',  'Present', 'Present', 'Present', 'Present',
+  'Present', 'Absent',  'Present', 'Present', 'Present',
+  'Present', 'Present', 'Present', 'Absent',  'Present',
+  'Present', 'Present', 'Present', 'Present', 'Present'
+]
+
+if (studentList.length === attendanceList.length) {
+  const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');
+
+  attendanceDropdowns.forEach((dropdown, index) => {
+    const preselected = dropdown.querySelector('.divider.text').textContent;
+    console.log('preselected= ' + preselected);
+
+    if (preselected !== "Absent - Excused") {
+      const menu = dropdown.querySelector('.menu');
+      console.log('menu= ' + menu);
+      const presentOption = [...menu.querySelectorAll('.item')].find(item => item.innerText === statusData[index]);
+
+      if (presentOption) {
+        presentOption.click();
+      };
+    };
+  });
+} else {
+  console.log("ERROR CHANGING ATTENDANCE - ARRAYS NOT SAME LENGTH");
+};
+
+
 //TODO #6a) SET ALL STUDENTS TO None
 if (studentList.length === attendanceList.length) {
   const attendanceDropdowns = document.querySelectorAll('.ui.selection.dropdown');

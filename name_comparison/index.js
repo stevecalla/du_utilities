@@ -2,9 +2,12 @@
 // https://www.npmjs.com/package/string-similarity
 // npm install string-similarity
 
-// import stringSimilarity from 'string-similarity';
-const stringSimilarity = require("string-similarity");
-const { participantRoster, list081423, list081723, list082423 } = require('./data');
+import stringSimilarity from 'string-similarity';
+import { participantRoster, list_today, list081423, list081723, list082423 } from './data.js';
+import chalk from 'chalk';
+
+// const stringSimilarity = require("string-similarity");
+// const { participantRoster, list_today, list081423, list081723, list082423 } = require('./data');
 
 function findSimilarNames(participantRoster, list2) {
   const similarNames = [];
@@ -83,7 +86,7 @@ function findMaxSimilarityScoresLessThan50(participantRoster, list2) {
 }
 
 // Create a Set to eliminate duplicates
-const uniqueList2 = new Set(list081723);
+const uniqueList2 = new Set(list_today);
 // Convert the Set back to an array
 const list2 = Array.from(uniqueList2);
 
@@ -95,13 +98,36 @@ const list2 = Array.from(uniqueList2);
 // console.log(notSimilarNames);
 // console.log(notSimilarNames.length);
 
-const maxSimilarityScores = findMaxSimilarityScores(participantRoster, list2);
-console.log(maxSimilarityScores);
-console.log(maxSimilarityScores.length);
+// const maxSimilarityScores = findMaxSimilarityScores(participantRoster, list2);
+// console.log(maxSimilarityScores);
+// console.log(maxSimilarityScores.length);
 
 const maxSimilarityScoresLessThan50 = findMaxSimilarityScoresLessThan50(participantRoster, list2);
 console.log(maxSimilarityScoresLessThan50);
 console.log(maxSimilarityScoresLessThan50.length);
-console.log(list081723.length);
+console.log(list_today.length);
 console.log(list2.length);
 console.log(maxSimilarityScoresLessThan50.length);
+
+
+const maxSimilarityScores = findMaxSimilarityScores(participantRoster, list2);
+console.log(maxSimilarityScores.forEach((score, i) => {
+  if (score.maxSimilarity <= 0.5) {
+    console.log(chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+  } else if (score.maxSimilarity <= 0.7) {
+    console.log(chalk.yellow((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+  } else {
+    console.log(chalk.green((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+  }
+  }));
+
+console.log(chalk.yellow(maxSimilarityScores.length));
+let present = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity > 0.50);
+let absent = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity <= 0.50);
+console.log(list_today.length + " " + present.length + " " + absent.length + " " + maxSimilarityScores.length)
+
+console.log(maxSimilarityScores.forEach((score, i) => {
+  if (score.maxSimilarity <= 0.5) {
+    console.log(chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+  } 
+  }));

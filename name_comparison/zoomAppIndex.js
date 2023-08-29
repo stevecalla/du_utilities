@@ -4,6 +4,7 @@
 // https://blog.logrocket.com/using-console-colors-node-js/
 // convert from es5 to es6 to use chalk https://www.digitalocean.com/community/tutorials/js-modules-es6
 
+//todo paste "type": "module" in package.json under main index.js line to run
 // const stringSimilarity = require("string-similarity");
 // const { chalk } = require("chalk");
 import stringSimilarity from 'string-similarity';

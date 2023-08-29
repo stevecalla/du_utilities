@@ -111,13 +111,15 @@ console.log(maxSimilarityScoresLessThan50.length);
 
 
 const maxSimilarityScores = findMaxSimilarityScores(participantRoster, list2);
+let count = 0;
 console.log(maxSimilarityScores.forEach((score, i) => {
+  count++;
   if (score.maxSimilarity <= 0.5) {
-    console.log(chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+    console.log(count + ") " + chalk.red((i) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   } else if (score.maxSimilarity <= 0.7) {
-    console.log(chalk.yellow((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+    console.log(count + ") " + chalk.yellow((i) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   } else {
-    console.log(chalk.green((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+    console.log(count + ") " + chalk.green((i) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   }
   }));
 
@@ -126,8 +128,10 @@ let present = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity > 0.
 let absent = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity <= 0.50);
 console.log(list_today.length + " " + present.length + " " + absent.length + " " + maxSimilarityScores.length)
 
+count = 0;
 console.log(maxSimilarityScores.forEach((score, i) => {
   if (score.maxSimilarity <= 0.5) {
-    console.log(chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+    count++;
+    console.log(count + ") " + chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   } 
   }));

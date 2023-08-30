@@ -40,28 +40,41 @@ parseCSVFile()
   .then(parsedData => {
     let parsedDataModifiedKeys = parsedData.map(participant => {
       return {
-        userName: participant['User Name'],
-        userEmail: participant['User Email'],
+        name: participant['User Name'],
+        email: participant['User Email'],
         joinTime: participant['Join time'],
         leaveTime: participant['Leave time'],
         duration: participant['Duration(Minutes)'],
       }
     });
 
+    //sort participants A-Z
     let sortedParticipants = parsedDataModifiedKeys.map(attendee => attendee).sort((a, b) => {
-      const nameA = a.userName || '';
-      const nameB = b.userName || '';
+      const nameA = a.name || ''; //handles null values
+      const nameB = b.name || ''; //handles null values
       return nameA.localeCompare(nameB);
     });
+    // console.log(sortedParticipants);
 
-    // //create string and copy to clipboard
-    let parsedDataString = sortedParticipants.map(name => `\"${name['userName']}\"`).join(', ');
+    //replace hash # space with comma space
+    const replaceHashSpaceWithCommaSpace = sortedParticipants.map(attendee => {
+      console.log(attendee);
+      const updatedName = attendee?.name?.replace('# ', ', ');
+      return { ...attendee, name: updatedName };
+    });
+
+    //filter out Instructors and Teaching assistants; if email address is null then attendees
+    let filteredParticipants = replaceHashSpaceWithCommaSpace.filter(attendee => attendee.email === null); // remove attendees with email address which are the instructors/teaching assistants
+    // console.log(filteredParticipants);
+
+    // create string and copy to clipboard
+    let parsedDataString = filteredParticipants.map(name => `\"${name['name']}\"`).join(', ');
     clipboardy.writeSync(parsedDataString);
-    console.log(parsedDataString);
+    // console.log(parsedDataString);
     // console.log('Names saved to clipboard ' + sortedParticipants.length);
 
-    // //export to excel
-    exportToExcel(sortedParticipants).catch(error => {
+    // export to excel
+    exportToExcel(filteredParticipants).catch(error => {
       console.error('An error occurred:', error);
     });
 
@@ -86,6 +99,7 @@ parseCSVFile()
 
   // Assuming the keys in the first object of the data array are the headers
   // const headers = Object.keys(data[0]);
+  const headers = {}
   // worksheet.addRow(headers);
 
   // console.log('Parsed CSV data:', parsedData);

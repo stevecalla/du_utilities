@@ -95,12 +95,18 @@ parseCSVFile()
   const outputFile = `/Users/stevecalla/Downloads/${outputName}`; // Replace with the desired output Excel file path
 
   const workbook = new excel.Workbook();
-  const worksheet = workbook.addWorksheet('Sheet 1');
+  // const worksheet = workbook.addWorksheet('Sheet 1');
+  const worksheet = workbook.addWorksheet(
+    'Sheet 1', 
+    { properties:{tabColor:{argb:'FFC0000'}}, 
+      views:[{state: 'frozen', xSplit: 0, ySplit:5}], //x is columns; y is rows
+      headerFooter:{firstHeader: "Hello Exceljs", firstFooter: "Hello World"}
+    }
+  );
 
   // Assuming the keys in the first object of the data array are the headers
-  // const headers = Object.keys(data[0]);
-  const headers = {}
-  // worksheet.addRow(headers);
+  const headers = Object.keys(parsedData[0]);
+  worksheet.addRow(headers);
 
   // console.log('Parsed CSV data:', parsedData);
 

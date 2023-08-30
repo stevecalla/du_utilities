@@ -1,21 +1,10 @@
-
-// Sure, here's how you can use the fuse.js library to achieve fuzzy string matching:
-
-// Install the fuse.js library:
-// sh
-// Copy code
-// npm install fuse.js
-// Use the library in your code:
-// javascript
-// Copy code
-// import Fuse from 'fuse.js';
-
 //https://www.npmjs.com/package/fuse.js?activeTab=readme
 //https://github.com/krisk/Fuse
 //https://www.fusejs.io/
 
 // import Fuse from 'fuse.js';
-const Fuse = require('fuse.js');
+// const Fuse = require('fuse.js');
+import Fuse from 'fuse.js';
 
 function findSimilarNames(list1, list2) {
   const options = {

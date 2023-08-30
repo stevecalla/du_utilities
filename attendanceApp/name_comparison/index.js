@@ -3,7 +3,7 @@
 // npm install string-similarity
 
 import stringSimilarity from 'string-similarity';
-import { participantRoster, list_today, list081423, list081723, list082423 } from './data.js';
+import { participantRoster, list_today, list_082823, list081423, list081723, list082423 } from './data.js';
 import chalk from 'chalk';
 
 // const stringSimilarity = require("string-similarity");

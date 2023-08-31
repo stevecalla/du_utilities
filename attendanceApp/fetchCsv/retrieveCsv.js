@@ -91,7 +91,7 @@ parseCSVFile()
   // export to excel
   let date = new Date().toISOString();
   const inputFile = `/Users/stevecalla/Downloads/zoomReport.csv`; // Replace with the path to your CSV file
-  const outputName = `zoomReport${date}.xlsx`;
+  const outputName = `zoomReport_RawData${date}.xlsx`;
   const outputFile = `/Users/stevecalla/Downloads/${outputName}`; // Replace with the desired output Excel file path
 
   const workbook = new excel.Workbook();
@@ -131,9 +131,7 @@ parseCSVFile()
 // const xlsxFilePath = filePath; // Replace with the path to your XLSX file
 
 function openFileWithDefaultProgram(outputName) {
-  // let filePath = `~/Users/stevecalla/Downloads/${outputName}`;
   let filePath = `~/Downloads/${outputName}`;
-  // let filePath = `~/Downloads/zoomReportTue\ Aug\ 29\ 2023\ 13:23:28\ GMT-0600\ \(Mountain\ Daylight\ Time\).xlsx`;
   console.log(filePath);
   let command = '';
 

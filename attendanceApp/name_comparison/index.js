@@ -6,6 +6,10 @@ import stringSimilarity from 'string-similarity';
 import { participantRoster, list_today, list_082823, list081423, list081723, list082423 } from './data.js';
 import chalk from 'chalk';
 
+import excel from 'exceljs';
+// import fs from 'fs/promises';
+import { exec } from 'child_process'; ////open excel file
+
 // const stringSimilarity = require("string-similarity");
 // const { participantRoster, list_today, list081423, list081723, list082423 } = require('./data');
 
@@ -54,7 +58,7 @@ function findMaxSimilarityScores(participantRoster, list2) {
       }
     });
 
-    maxSimilarityScores.push({ index: count, name: name1, matchName: matchName, maxSimilarity });
+    maxSimilarityScores.push({ index: count, name: name1, maxSimilarity, matchName: matchName, });
   });
 
   return maxSimilarityScores;
@@ -160,4 +164,57 @@ clipboardy.writeSync(inputPlugString);
 console.log(inputPlugString);
 // console.log('Names saved to clipboard ' + sortedParticipants.length);
 
-  
+// todo generate only present and export to excel
+// count = 0;
+// console.log(maxSimilarityScores.forEach((score, i) => {
+  //   // console.log(score)
+  //   if (score.maxSimilarity > 0.5 && score) {
+    //     count++;
+    //     console.log(count + ") " + chalk.green((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
+    //   } 
+    //   }));
+    
+const zoomReport = maxSimilarityScores.filter(score => score.maxSimilarity > 0.50).map((result, index) => {
+  return {
+    index: (index + 1),
+    name: result.name,
+    score: `${Math.floor(result.maxSimilarity * 100)}%`,
+    matchName: result.matchName,
+  }
+})
+// console.log(zoomReport);
+
+async function exportToExcel(parsedData) {
+  let date = new Date().toISOString();
+  const outputName = `zoomReport_RawData${date}.xlsx`;
+  const outputFile = `/Users/stevecalla/Downloads/${outputName}`;
+
+  const workbook = new excel.Workbook();
+  const worksheet = workbook.addWorksheet('Sheet 1');
+
+  // Assuming the keys in the first object of the data array are the headers
+  const headers = Object.keys(parsedData[0]);
+  worksheet.addRow(headers);
+
+  parsedData.forEach(row => {
+    const values = Object.values(row);
+    worksheet.addRow(values);
+  });
+
+  try {
+    await workbook.xlsx.writeFile(outputFile);
+    console.log('Excel file created:', outputFile);
+
+    // Open excel file
+    openFileWithDefaultProgram(outputFile);
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+function openFileWithDefaultProgram(filePath) {
+  exec(`open "${filePath}"`);
+}
+
+exportToExcel(zoomReport);

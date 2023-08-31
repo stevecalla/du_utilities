@@ -4,11 +4,14 @@ import { participantRoster, list_today, list081423, list081723, list082423, list
 // 1. List of items to search in
 // see import above... list_today
 // convert to include a names key
+
 let names = list_082823.map(names => {
   return {
     fullName: names,
   }
 });
+
+// const names = [ { fullName: "Gregory Adams", }, { fullName: 'Greg Adams' }, { fullName: 'adams, greg' }]
 
 // console.log(names);
 
@@ -17,8 +20,11 @@ const fuse = new Fuse(names, {
   keys: ['fullName'],
   includeScore: true,
   includeMatches: true,
-  threshold: 0.9,
+  threshold: 0.6,
+  shouldSort: true,
 })
+
+console.log(fuse);
 
 // 3. Define an array of search queries
 // let searchInput = ['mickey mouse', 'steve calla'];
@@ -52,7 +58,7 @@ const resultsAll = searchInput.map((query, index) => {
 // Display results for searchInput_v2
 let finalResults = resultsAll.map(item => {
   return {
-    name: item?.bestMatch?.item?.fullName || item.query,
+    name: item.query,
     matchName: item?.bestMatch?.matches[0]?.value || "no match",
     matchNameLength: item?.bestMatch?.matches?.length || 0,
     // score: item.bestMatch.score, //original fuse score

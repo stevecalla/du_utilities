@@ -174,14 +174,16 @@ console.log(inputPlugString);
     //   } 
     //   }));
     
-const zoomReport = maxSimilarityScores.filter(score => score.maxSimilarity > 0.50).map((result, index) => {
-  return {
-    index: (index + 1),
-    name: result.name,
-    score: `${Math.floor(result.maxSimilarity * 100)}%`,
-    matchName: result.matchName,
-  }
-})
+const zoomReport = maxSimilarityScores.
+  filter(score => score.maxSimilarity > 0.50).
+  map((result, index) => {
+    return {
+      index: (index + 1),
+      name: result.name,
+      score: `${Math.floor(result.maxSimilarity * 100)}%`,
+      matchName: result.matchName,
+    }
+});
 // console.log(zoomReport);
 
 async function exportToExcel(parsedData) {

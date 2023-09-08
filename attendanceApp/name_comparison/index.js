@@ -65,7 +65,7 @@ function findMaxSimilarityScores(participantRoster, list2) {
 }
 
 function findMaxSimilarityScoresLessThan50(participantRoster, list2) {
-  const maxSimilarityScoresLessThan50 = [];
+  const maxSimilarityScoresLessThan55 = [];
 
   let count = 0;
   participantRoster.forEach(name1 => {
@@ -81,7 +81,7 @@ function findMaxSimilarityScoresLessThan50(participantRoster, list2) {
       }
     });
 
-    if(maxSimilarity < 0.5) {
+    if(maxSimilarity < 0.55) {
       maxSimilarityScoresLessThan50.push({ index: count, name: name1, matchName: matchName, maxSimilarity });      
     }
   });
@@ -128,13 +128,13 @@ console.log(maxSimilarityScores.forEach((score, i) => {
   }));
 
 console.log(chalk.yellow(maxSimilarityScores.length));
-let present = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity > 0.50);
-let absent = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity <= 0.50);
+let present = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity > 0.55);
+let absent = maxSimilarityScores.filter(({maxSimilarity}) => maxSimilarity <= 0.55);
 console.log(list_today.length + " " + present.length + " " + absent.length + " " + maxSimilarityScores.length)
 
 count = 0;
 console.log(maxSimilarityScores.forEach((score, i) => {
-  if (score.maxSimilarity <= 0.5) {
+  if (score.maxSimilarity <= 0.55) {
     count++;
     console.log(count + ") " + chalk.red((i + 1) + "=> " + `${score.name}      ${Math.floor(score.maxSimilarity * 100)}%       ${score.matchName}`)); 
   } 
@@ -142,7 +142,7 @@ console.log(maxSimilarityScores.forEach((score, i) => {
   
 
 let inputPlug = maxSimilarityScores.map((score, i) => {
-  let status = score.maxSimilarity <= 0.5 ? "Absent" : "Present";
+  let status = score.maxSimilarity <= 0.55 ? "Absent" : "Present";
   return status;
   return {
     // index: i,
@@ -175,7 +175,7 @@ console.log(inputPlugString);
     //   }));
     
 const zoomReport = maxSimilarityScores.
-  filter(score => score.maxSimilarity > 0.50).
+  filter(score => score.maxSimilarity > 0.55).
   map((result, index) => {
     return {
       index: (index + 1),

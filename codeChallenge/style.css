@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+main {
+  padding-bottom: 4rem;
+}
+
+header {
+  text-align: center;
+  background-color: #0D98BA;
+  border-radius: .3rem;
+  color: #fff;
+  padding: 3rem;
+}
+
+h1, h2, p, form, input {
+  margin: 1rem 0;
+}
+
+img {
+  width: 3rem;
+  height: auto;
+  border-radius: 100%;
+}
+
+button {
+  background-color: #0D98BA;
+  color: #fff;
+  border-radius: 1rem;
+  border: 0;
+  width: 6rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: .5rem;
+}
+
+ul li {
+  list-style: none;
+}
+
+footer {
+  text-align: center;
+  background-color: darkgreen;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  padding:0.5rem;
+  height: 4rem;
+  width: 100%;
+}
+
+.container {
+  text-align: center;
+}
+
+.form {
+  text-align: center;
+}
+
+.task-card {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1rem;
+  position: relative;
+}
+
+.s-to-do {
+  background-color: orange;
+}
+
+.s-in-progress {
+  background-color: yellow;
+}
+
+.s-done {
+  background-color: lightgreen;
+}
+
+.active {
+  background-color: #fff;
+  color: #0D98BA;
+}
+
+.delete-btn {
+  background-color: red;
+  width: 2rem;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+}
+
+.button-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-list li button {
+  flex: 1;
+  margin: 0.5rem;
+}
+
+#submit {
+  background-color: #0D98BA;
+  color: #fff;
+  border-radius: 1rem;
+  border: 0;
+  cursor: pointer;
+  width: 6rem;
+  padding: .5rem;
+}
+
+.button-list li button:hover {
+  background-color: #fff;
+  color: #0D98BA;
+}
+
+.delete-btn:hover {
+  background-color: #fff;
+  color: red;
+}
+
+#submit:hover {
+  background-color: #fff;
+  color: #0D98BA;
+  border: #0D98BA 1px solid;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+      display: flex;
+  }
+
+  .form {
+      flex: 1;
+  }
+
+  #list {
+      flex: 2;
+  }
+
+  .button-list {
+      flex-direction: row;
+  }
+} 
+
+@media screen and (min-width: 992px) {
+  #list {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .task-card {
+      margin: 2.5%;
+      width: 45%;
+  }
+
+  button {
+      font-size: 0.75rem;
+      width: 5.25rem;
+  }
+} 

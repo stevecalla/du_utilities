@@ -3,6 +3,8 @@
 // https://applications.zoom.us/lti/rich/home/meeting/reports
 // https://applications.zoom.us/lti/rich/export/report/participant/96191378135?oauth_consumer_key=a5_CyEzyQXaokIYx5k3iuA&lti_scid=622f9990cb6848f741fd8f9cf00a3a3230171cdea4ac250ae36cfc0d31fef2af
 
+//node retrieveCsv.js
+
 import fs from 'fs/promises';
 import Papa from 'papaparse'; //https://www.papaparse.com/demo
 import clipboardy from 'clipboardy';
@@ -11,6 +13,7 @@ import { spawn } from 'child_process'; ////open excel file
 
 async function parseCSVFile() {
   try {
+    
     const csvFilePath = '/Users/stevecalla/Downloads/zoomReport.csv';
     const csvText = await fs.readFile(csvFilePath, 'utf-8');
 

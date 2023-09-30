@@ -3,29 +3,22 @@
 // const { seedData } = require("./seed"); //used to figure out data mapping
 // const { getOwnerRepoInfo } = require("./seedUrls");
 
-import pLimit from 'p-limit';
-import 'dotenv/config'
-import { getOwnerRepoInfo } from './seedUrls.js';
-
-
-const limit = pLimit(5);
-const options = {
-  method: "GET",
-  headers: {
-    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-  },
-};
+import pLimit from "p-limit";
+import "dotenv/config";
+import { getOwnerRepoInfo } from "./seedUrls.js";
 
 //SECTION //STEP #1: GET REPO INFO FROM SEEDURL FILE
-getInfo(); //starts the process
 
 function getInfo() {
   let repoInfo = getOwnerRepoInfo(); //get repo url list/info
   createRepoRequestUrl(repoInfo); //create api url
 }
 
+//SECTION //STEP #3: FETCH STATS
+const limit = pLimit(5);
+
 function reduceStat(data, stat) {
-  let stats = data.value.map((element) => {
+  let stats = data.map((element) => {
     let commits = 0;
     for (let i = 0; i < element.weeks.length; i++) {
       commits += element.weeks[i][stat]; // commits += element.weeks[i].c;
@@ -35,41 +28,13 @@ function reduceStat(data, stat) {
   return stats;
 }
 
-//SECTION //STEP #3: FETCH STATS
-//Original fetch code
-// function fetchContributorStats(requestUrl, group, repo, owner) {
-//   console.log(requestUrl);
-//   if (!requestUrl) {
-//     renderContributorStats(seedData, group, repo, owner);
-//   } else {
-//     fetch(requestUrl)
-//       .then(function (response, json) {
-//         if (!response.ok) {
-//           let response = data;
-//           // We should get a 200 (OK) status code if everything is fine/working
-//           throw Error(
-//             `Response status ${response.status} (${response.statusText}): ${json.message}`
-//           );
-//         }
-//         return response.json();
-//       })
-//       .then(function (data) {
-//         // console.log(data); //raw data
-//         renderContributorStats(data, group, repo, owner);
-//       })
-//       .catch((exception) => {
-//         console.log(
-//           new Map([
-//             [TypeError, "There was a problem fetching the response."],
-//             [SyntaxError, "There was a problem parsing the response."],
-//             [Error, exception.message],
-//           ]).get(exception.constructor())
-//         );
-//       });
-//   }
-// }
+const options = {
+  method: "GET",
+  headers: {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+  },
+};
 
-//Promised fetch code to ensure all fetchs settle using promise all
 async function fetchContributorStats(requestUrl, repoInfo) {
   //aggregate all the fetches into an array
   const promises = [];
@@ -84,18 +49,18 @@ async function fetchContributorStats(requestUrl, repoInfo) {
     const response = await Promise.all(promises); //execute the array of promises
     const data = await Promise.allSettled(response?.map((response) => response.json()));
 
-    console.table(data.map(element => element));
+    console.table(data.map((element) => element));
 
     const combinedData = data?.map((data, i) => {
       return {
-        status: data.status,
+        status: data?.status,
         group: repoInfo[i]?.group,
         owner: repoInfo[i]?.owner,
         repoName: repoInfo[i]?.repoName,
         contributor: data.value.map((element) => element.author.login),
-        commits: reduceStat(data, "c"),
-        adds: reduceStat(data, "a"),
-        deletes: reduceStat(data, "d"),
+        commits: reduceStat(data.value, "c"),
+        adds: reduceStat(data.value, "a"),
+        deletes: reduceStat(data.value, "d"),
         url: repoInfo[i]?.url,
       };
     });
@@ -103,7 +68,6 @@ async function fetchContributorStats(requestUrl, repoInfo) {
   } catch (error) {
     throw Error("Promise failed" + error);
   }
-
 }
 
 //SECTION //STEP #2: CREATE REPO FETCH URL
@@ -129,37 +93,6 @@ function createRepoRequestUrl(repoInfo) {
 }
 
 //SECTION //STEP #4: RENDER STATS IN TERMINAL
-// function renderContributorStats(data, repoInfo) {
-//   // console.log(repoInfo);
-//   let statsByContributor = [];
-
-//   for (let i = 0; i < data.length; i++) {
-//     let groupData = data[i];
-//     for (let j = 0; j < groupData.length; j++) {
-//       let contributor = data[i][j];
-
-//       statsByContributor.push({
-//         group: repoInfo[i].group || 0,
-//         owner: repoInfo[i].owner || "",
-//         repoName: repoInfo[i].repoName || "",
-//         contributor: contributor.author.login,
-//         commits: contributor.total,
-//         commits: contributor.weeks
-//           .map((week) => week.c)
-//           .reduce((acc, cur) => (acc += cur)),
-//         adds: contributor.weeks
-//           .map((week) => week.a)
-//           .reduce((acc, cur) => (acc += cur)),
-//         deletes: contributor.weeks
-//           .map((week) => week.d)
-//           .reduce((acc, cur) => (acc += cur)),
-//         url: repoInfo[i].url,
-//       });
-//     }
-//   }
-//   console.table(statsByContributor);
-// }
-
 function renderContributorStats(combinedData) {
   let statsByContributor = [];
 
@@ -180,3 +113,5 @@ function renderContributorStats(combinedData) {
   });
   console.table(statsByContributor);
 }
+
+getInfo(); //starts the process

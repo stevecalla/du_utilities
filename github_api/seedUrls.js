@@ -10,13 +10,13 @@ let seedUrls = [
   "https://github.com/G-marshall1/Home-Builder-Buddy", //3
   "https://github.com/Krich2022/reel-roulette", //4
   "https://github.com/Nehoa21/Tourist-Attraction-Locator", //5
-  "https://github.com/cpulsipher24/Movie-Knight---Project-1", //6
+  "https://github.com/cpulsipher24/Movie-Knight", //6
   "https://github.com/phechzzz/BoozeBot", //7
   "https://github.com/nicholasmelo/SightScene", //8
   "https://github.com/SlemJosh/culinary-crossroads", //9
   "https://github.com/shawncrook411/Mindful_Meals", //10
   "https://github.com/JackieChheng/JAMSearchGamers", //11
-  "", //12
+  "https://github.com/whitbreezy/get-rhythm", //12
   "https://github.com/DAsh365/project-1", //13
   "https://github.com/tavargas9/movie-soundtrack-id", //14
   "https://github.com/JJTheDev/Fitness-App", //15
@@ -38,7 +38,9 @@ const getOwnerRepoInfo = function () {
   return ownerRepoList;
 };
 
-module.exports = {
-  seedUrls,
-  getOwnerRepoInfo,
-};
+export { getOwnerRepoInfo };
+
+// module.exports = {
+//   seedUrls,
+//   getOwnerRepoInfo,
+// };

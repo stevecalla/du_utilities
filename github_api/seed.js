@@ -214,16 +214,147 @@ let seedData = [
   },
 ];
 
-const statsByAuthor = seedData.map((element) => {
+const statsByContributor = seedData.map((element) => {
   return {
     author: element.author.login,
     total: element.total,
-    commits: element.weeks.map((week) => week.c).reduce((acc, cur) => acc += cur),
-    adds: element.weeks.map((week) => week.a).reduce((acc, cur) => acc += cur),
-    deletes: element.weeks.map((week) => week.d).reduce((acc, cur) => acc += cur),
+    commits: element.weeks
+      .map((week) => week.c)
+      .reduce((acc, cur) => (acc += cur)),
+    adds: element.weeks
+      .map((week) => week.a)
+      .reduce((acc, cur) => (acc += cur)),
+    deletes: element.weeks
+      .map((week) => week.d)
+      .reduce((acc, cur) => (acc += cur)),
   };
 });
-// console.log(statsByAuthor);
+// console.log(statsByContributor);
+
+let seedData2 = [
+  [
+    {
+      total: 320,
+      weeks: [
+        { w: 1676160000, a: 142, d: 97, c: 20 },
+        { w: 1676764800, a: 0, d: 0, c: 300 },
+      ],
+      author: {
+        login: "RodBennett",
+        id: 106923428,
+      },
+    },
+    {
+      total: 23,
+      weeks: [
+        { w: 1676160000, a: 142, d: 97, c: 6 },
+        { w: 1676764800, a: 0, d: 1, c: 15 },
+      ],
+      author: {
+        login: "Hoffalypse",
+        id: 106857564,
+      },
+    },
+  ],
+  [
+    {
+      total: 63,
+      weeks: [
+        { w: 1673740800, a: 2745, d: 1221, c: 1 },
+        { w: 1674345600, a: 414, d: 170, c: 2 },
+      ],
+      author: {
+        login: "stevecalla",
+      },
+    },
+    {
+      total: 102,
+      weeks: [
+        { w: 1673136000, a: 1885, d: 1437, c: 1 },
+        { w: 1673740800, a: 2745, d: 1221, c: 2 },
+        { w: 1674345600, a: 414, d: 170, c: 3 },
+        { w: 1674950400, a: 156, d: 32, c: 4 },
+        { w: 1675555200, a: 96, d: 57, c: 5 },
+        { w: 1676160000, a: 142, d: 97, c: 6 },
+      ],
+      author: {
+        login: "RodBennett",
+      },
+    },
+    {
+      total: 122,
+      weeks: [
+        { w: 1673136000, a: 1885, d: 1437, c: 1 },
+        { w: 1673740800, a: 2745, d: 1221, c: 2 },
+        { w: 1673740800, a: 2745, d: 1221, c: 3 },
+      ],
+      author: {
+        login: "Hoffalypse",
+      },
+    },
+    {
+      total: 343,
+      weeks: [
+        { w: 1673136000, a: 1885, d: 1437, c: 1 },
+        { w: 1673740800, a: 2745, d: 1221, c: 2 },
+        { w: 1674345600, a: 414, d: 170, c: 3 },
+        { w: 1674950400, a: 156, d: 32, c: 4 },
+      ],
+      author: {
+        login: "stevecalla",
+      },
+    },
+  ],
+];
+
+// const stats = seedData2.map((element) => console.log(element));
+const stats2 = seedData2.map((a, i) => {
+  return {
+    group: i,
+    owner: "owner_" + i,
+    repoName: "repoName_" + i,
+    contributor: a.map((element) => element.author.login),
+    commits: reduceStat(a, "c"),
+    adds: reduceStat(a, "a"),
+    deletes: reduceStat(a, "d"),
+    url: "repoURL_" + i,
+  };
+});
+
+function reduceStat(a, stat) {
+  let stats = a.map((element) => {
+    let commits = 0;
+    for (let i = 0; i < element.weeks.length; i++) {
+      commits += element.weeks[i][stat]; // commits += element.weeks[i].c;
+    }
+    return commits;
+  });
+  return stats;
+}
+
+function renderStats() {
+  console.log(stats2);
+
+  let statsByContributor = [];
+
+  stats2.map(element => {
+    for (let i = 0; i < element.contributor.length; i++) {
+      statsByContributor.push({
+        group: element.group,
+        owner: element.owner,
+        repoName: element.repoName,
+        contributor: element.contributor[i],
+        commits: element.commits[i],
+        adds: element.adds[i],
+        deletes: element.deletes[i],
+        url: element.url,
+      })
+    };
+  })
+  console.table(statsByContributor);
+}
+
+renderStats();
 
 module.exports = {
   seedData,

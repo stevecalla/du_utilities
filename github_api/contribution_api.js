@@ -18,6 +18,7 @@ function getInfo() {
 //SECTION //STEP #3: FETCH STATS
 const limit = pLimit(5);
 const queue = new pQueue({concurrency: 5});
+// console.log(queue);
 const options = {
   method: "GET",
   headers: {
@@ -103,7 +104,6 @@ function createRepoRequestUrl(repoInfo) {
     // console.log(requestUrl);
     return requestUrl;
   });
-
   fetchContributorStats(repoArray, repoInfo);
 }
 

@@ -4,6 +4,7 @@
 // const { getOwnerRepoInfo } = require("./seedUrls");
 
 import pLimit from "p-limit";
+import pQueue from 'p-queue';
 import "dotenv/config";
 import { getOwnerRepoInfo } from "./seedUrls.js";
 
@@ -16,6 +17,13 @@ function getInfo() {
 
 //SECTION //STEP #3: FETCH STATS
 const limit = pLimit(5);
+const queue = new pQueue({concurrency: 5});
+const options = {
+  method: "GET",
+  headers: {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+  },
+};
 
 function reduceStat(data, stat) {
   let stats = data.map((element) => {
@@ -28,13 +36,6 @@ function reduceStat(data, stat) {
   return stats;
 }
 
-const options = {
-  method: "GET",
-  headers: {
-    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-  },
-};
-
 async function fetchContributorStats(requestUrl, repoInfo) {
   //aggregate all the fetches into an array
   const promises = [];
@@ -42,8 +43,22 @@ async function fetchContributorStats(requestUrl, repoInfo) {
     const url = requestUrl[i];
     // promises.push(fetch(url, options).then((res) => res.json()));
     // promises.push(fetch(url, options));
-    promises.push(limit(() => fetch(url, options)));
+    // promises.push(limit(() => fetch(url, options)));
+    promises.push(queue.add(() => fetch(url, options)));
   }
+
+  let count = 0;
+  // queue.on('active', () => {
+  //   console.log(`Working on item #${++count}.  Size: ${queue.size}  Pending: ${queue.pending}`);
+  // });
+
+  queue.on('next', () => {
+    console.log(`Working on item #${++count}. Task is completed.  Size: ${queue.size}  Pending: ${queue.pending}`);
+  });
+  
+  queue.on('error', error => {
+    console.error(error);
+  });
 
   try {
     const response = await Promise.all(promises); //execute the array of promises

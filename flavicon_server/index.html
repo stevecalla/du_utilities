@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="easy, free &amp; configurable hosted favicons"
+    />
+    <title>zany 🤪 easy, free &amp; configurable hosted favicons</title>
+    <link rel="icon" href="/favicon.svg?emoji=🤪" />
+    <style>
+      body {
+        background: #292f36;
+        color: #fff;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      a {
+        color: #fff;
+      }
+
+      footer {
+        opacity: 0.5;
+      }
+    </style>
+    <script
+      type="module"
+      src="chrome-extension://jdkknkkbebbapilgoeccciglkfbmbnfm/hook.js"
+    ></script>
+  </head>
+
+  <body data-new-gr-c-s-check-loaded="14.1129.0" data-gr-ext-installed="">
+    <div class="container">
+      <header>
+        <h1>zany 🤪</h1>
+        <h2>easy, free &amp; configurable hosted favicons</h2>
+        <p>
+          zany is a free, easy-to-use, configurable favicon server. simply point
+          your icon link tag at
+          <a href="https://zany.sh/favicon.svg">https://zany.sh/favicon.svg</a>
+          and configure your styling. no need to generate, download, and serve
+          favicons.
+        </p>
+      </header>
+      <main>
+        <section>
+          <h3>usage</h3>
+          <pre>	<code>
+&lt;link rel="icon" href="https://zany.sh/favicon.svg"/&gt;
+&lt;link rel="icon" href="https://zany.sh/favicon.svg?emoji=🤑"/&gt;
+&lt;link rel="icon" href="https://zany.sh/favicon.svg?text=hi"/&gt;
+</code>
+        </pre>
+        </section>
+        <h3>api</h3>
+        <p>zany supports the following query params:</p>
+        <ul>
+          <li><b>text</b>: text to render instead of an emoji.</li>
+          <li><b>emoji</b>: custom emoji to render.</li>
+          <li>
+            <b>background-color</b>: favicon background color. anything that
+            works in css. if you use a hex code, be sure to escape the hash
+            (%23).
+          </li>
+          <li>
+            <b>text-color</b>: favicon text color, if using the
+            <code>text</code> param. anything that works in css. if you use a
+            hex code, be sure to escape the hash (%23).
+          </li>
+          <li>
+            <b>font-family</b>: favicon font family, if using the
+            <code>text</code> param. zany automatically sizes text to fit the
+            favicon. it gets tough to read after 2 or 3 characters.
+          </li>
+        </ul>
+        <section>
+          <h3>testing</h3>
+          <p>you can test in your browser bar like so:</p>
+          <pre><code>data:text/html,&lt;link rel="icon" href="https://zany.sh/favicon.svg?text=ZN&amp;font-family=serif&amp;text-color=white&amp;background-color=black"/&gt;</code>
+        </pre>
+        </section>
+        <section>
+          <h3>privacy</h3>
+          <p>
+            no shenanigans here. other than logging some basic stuff about the
+            http request, no tracking of any kind. take a look at the response
+            headers.
+          </p>
+        </section>
+      </main>
+      <footer>
+        <small>
+          © 2023
+          <a href="https://github.com/thejchap" target="_blank">thejchap</a>
+        </small>
+      </footer>
+    </div>
+  </body>
+  <grammarly-desktop-integration
+    data-grammarly-shadow-root="true"
+  ></grammarly-desktop-integration>
+</html>

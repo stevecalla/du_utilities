@@ -101,12 +101,15 @@ for (let i = 2; i < 75; i++) {
 
 //TODO Step #4 Get Student List
 //SELECT THE 1ST ROW ELEMENT
+
 document.querySelector('body .row');
 document.querySelector('.row'); //select 
 
 //#1) TARGET & SELECT => STUDENT & ATTENDANCE LIST
-const studentList = document.querySelectorAll(`a`);
+const studentList = document.querySelectorAll(`.nine a`);
 const attendanceList = document.querySelectorAll(`.divider.text`);
+// console.log(studentList);
+// console.log(attendanceList);
 console.log(studentList.length + " " + attendanceList.length);
 
 //TODO Step #5 Print Student List with Attendance

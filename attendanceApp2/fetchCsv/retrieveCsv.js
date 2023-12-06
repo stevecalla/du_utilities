@@ -43,7 +43,7 @@ parseCSVFile()
   .then(parsedData => {
     let parsedDataModifiedKeys = parsedData.map(participant => {
       return {
-        name: participant['User Name'],
+        name: participant['User Name'] || 'aaaa',
         email: participant['User Email'],
         joinTime: participant['Join time'],
         leaveTime: participant['Leave time'],
@@ -51,13 +51,10 @@ parseCSVFile()
       }
     });
 
-    //used to determine if a non-string is being returned
-    // for (let i = 0; i < parsedDataModifiedKeys.length; i++) {
-    //   console.log(parsedDataModifiedKeys[i].name + " => => => " + typeof parsedDataModifiedKeys[i].name);
-    // }
+    console.log(parsedDataModifiedKeys);
 
     //sort participants A-Z
-    let sortedParticipants = parsedDataModifiedKeys.filter(element => typeof element.name === "string").map(attendee => attendee).sort((a, b) => {
+    let sortedParticipants = parsedDataModifiedKeys.map(attendee => attendee).sort((a, b) => {
       const nameA = a.name || ''; //handles null values
       const nameB = b.name || ''; //handles null values
       return nameA.localeCompare(nameB); //fix
